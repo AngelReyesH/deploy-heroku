@@ -1,14 +1,11 @@
-const express = require('express');
 const path = require('path');
+const express = require('express');
 const app = express();
-const port = 3000;
 
-app.use(express.static(path.join(__dirname, 'nx-getting-started-ui')));
-
-app.get('/', (req, res) => {
-    res.send('Invalid endpoint');
+app.use(express.static('./nx-getting-started-ui'));
+app.get("/*",function(req, res){
+    res.sendFile("index.html",{root: './nx-getting-started-ui/'});
 });
 
-app.listen(port, () => {
-    console.log("Server started on port: " + port)
-});
+app.listen(process.env.PORT || 8080);
+console.log('running in ${process.env.PORT || 8080}');
